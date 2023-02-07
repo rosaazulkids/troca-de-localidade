@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Troca de Localidade - @mikaelzera</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="static/css/troca_de_localidade.css" >
+</head>
+    <style></style>
+<body>
+    <form class="formulario">
+        <select class="select-loja" id="input-loja" name="input-loja">
+          <option value="rosa-azul">Rosa Azul</option>
+          <option value="use-force">Use Force</option>
+        </select>
+        <input id="input-sku" name="input-sku" class="input-form form-control" type="text" placeholder="Referência (SKU)"
+               style="text-align: center">
+        <input id="input-loc-antiga" name="input-loc-antiga" class="input-form form-control" type="text"
+               placeholder="Localidade Antiga" style="text-align: center">
+        <input id="input-loc-nova" name="input-loc-nova" type="text" class="input-form form-control"
+               placeholder="Localidade Nova" style="text-align: center">
+        <input id="input-quantidade" name="input-quantidade" type="number" class="input-form form-control"
+               placeholder="Quantidade (Padrão = Quantidade liberada)" style="text-align: center">
+        <input id="input-observacao" name="input-observacao" type="text" class="input-form form-control"
+               placeholder="Observação (Opcional)" style="text-align: center">
+        <button class="btn-cancelar" type="submit" formaction="{{ url_for('troca_de_localidade') }}" formmethod="GET">
+            Cancelar
+        </button>
+        <button id="btn-executar" class="btn-executar" type="submit" formaction="/executar" formmethod="POST">
+            Executar
+        </button>
+    </form>
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Loja</th>
+            <th scope="col">SKU</th>
+            <th scope="col">Localidade Antiga</th>
+            <th scope="col">Localidade Nova</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Situação</th>
+            <th scope="col">Observação</th>
+            <th scope="col">Usuário</th>
+            <th scope="col">Hora/Data</th>
+            <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if lista_troca_localidade %}
+            {% for item in lista_troca_localidade %}
+              <tr>
+                  <th scope="row">{{ item['id'] }}</th>
+                  <th scope="row">{{ item['loja'] }}</th>
+                  <th scope="row">{{ item['sku'] }}</th>
+                  <td>{{ item['loc-antiga'] }}</td>
+                  <td>{{ item['loc-nova'] }}</td>
+                  <td>{{ item['quantidade'] }}</td>
+                  <td>{{ item['situacao'] }}</td>
+                  <td>{{ item['observacao'] }}</td>
+                  <td>{{ item['usuario'] }}</td>
+                  <td>{{ item['data-hora'] }}</td>
+                  <td>
+                      <form>
+                          <button id="btn-cancelar" class="btn-cancelar" type="submit"
+                                  formaction="/cancelar/{{ item['id'] }}" formmethod="POST">
+                              Cancelar
+                          </button>
+                      </form>
+                  </td>
+              </tr>
+            {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+</body>
+</html>

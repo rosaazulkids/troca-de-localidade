@@ -1,0 +1,63 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    background: #EDEDED;
+    display: grid;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.formulario {
+    padding: 0px 10px 0px 20px
+    display: flex;
+    margin-left: 34%;
+}
+
+
+th {
+    text-align: center;
+}
+
+
+td {
+    text-align: center;
+}
+
+
+button {
+    border: none;
+    padding: 5px 15px 8px 15px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .3s;
+    border-radius: 5px;
+}
+
+
+.btn-executar {
+    margin-left: 150px;
+    background-color: #008000;
+    color: #FFFFFF;
+}
+
+
+.btn-cancelar {
+    background-color: #FF0000;
+    color: #FFFFFF;
+}
+
+.select-loja {
+    width: 50%;
+    height: 30px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+.input-form {
+    width: 50%;
+    margin-bottom: 10px;
+}
