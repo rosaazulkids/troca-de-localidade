@@ -1,63 +1,107 @@
-body {
-    width: 100vw;
-    height: 100vh;
-    background: #EDEDED;
-    display: grid;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.formulario {
-    padding: 0px 10px 0px 20px
+.body-inputs-troca {
     display: flex;
-    margin-left: 34%;
+    align-items: center;
+    justify-content: center;
+
+    /* border: solid #FF0000 */
 }
 
+.inputs-troca {
+    width: 50%;
+    height: 48vh;
+    display: flex;
+    display-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* border: solid #FF0000 */
+}
+
+.input-form {
+    width: 25em;
+    padding: 5px 0px 5px 0px;
+    margin-bottom: 10px;
+    text-align: center;
+    border: 1.5px solid #000;
+    color: #000;
+}
+
+.head-form {
+    width: 25em;
+    display: flex;
+    align-items: center
+
+    /* border: solid #FF0000 */
+}
+
+.inputs-localidades {
+    width: 25em;
+    display: flex;
+    align-items: center
+
+    /* border: solid #FF0000 */
+}
+
+.footer-form {
+    width: 25em;
+    display: flex;
+    align-items: center
+
+    /* border: solid #FF0000 */
+}
+
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    color: #FFF;
+}
+
+button, a {
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .3s;
+    border-radius: 5px;
+
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+}
+
+.btn-cancelar {
+    background-color: #F73535;
+    color: #FFFFFF;
+}
+
+.btn-cancelar:hover {
+    background-color: #F76363;
+}
+
+.btn-cancelar:focus {
+    background-color: #F7A9A9;
+}
+
+
+.btn-executar {
+    margin-left: 170px;
+    background-color: #50A317;
+    color: #FFFFFF;
+}
+
+.btn-executar:hover {
+    background-color: #9ED266;
+}
+
+.btn-executar:focus {
+    background-color: #B7D885;
+}
 
 th {
     text-align: center;
 }
 
-
 td {
     text-align: center;
-}
-
-
-button {
-    border: none;
-    padding: 5px 15px 8px 15px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background .3s;
-    border-radius: 5px;
-}
-
-
-.btn-executar {
-    margin-left: 150px;
-    background-color: #008000;
-    color: #FFFFFF;
-}
-
-
-.btn-cancelar {
-    background-color: #FF0000;
-    color: #FFFFFF;
-}
-
-.select-loja {
-    width: 50%;
-    height: 30px;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-
-.input-form {
-    width: 50%;
-    margin-bottom: 10px;
 }
