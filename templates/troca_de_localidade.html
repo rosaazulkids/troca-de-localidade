@@ -8,59 +8,63 @@
 </head>
     <style></style>
 <body>
-    <div class="body-inputs-troca">
-        <div class="inputs-troca">
-            <form class="formulario">
-                <div class="head-form">
-                    <input id="display-id" name="display-id" class="input-form form-control" type="text"
-                           placeholder="ID" value="{{ id_item }}" style="width: 50px" readonly>
-                    <select class="input-form" id="input-loja" name="input-loja"
-                            style="margin-right: 5px; margin-left: 10px; border-radius: 5px; cursor: pointer;">
-                        {% if id_item %}
-                          <option selected="selected" value="{{ item['loja'] }}">{{ item['loja'] }}</option>
-                        {% elif loja_padrao %}
-                          <option selected="selected" value="{{ loja_padrao }}">{{ loja_padrao }}</option>
-                        {% endif %}
-                      <option value="Rosa Azul">Rosa Azul</option>
-                      <option value="Use Force">Use Force</option>
-                    </select>
-                    <input id="input-user" name="input-user" class="input-form form-control" type="text"
-                           placeholder="Usuário" style="margin-left: 5px;"
-                           value="{{ usuario_padrao if usuario_padrao else '' }}">
-                </div>
-                <input id="input-sku" name="input-sku" class="input-form form-control" type="text"
-                       placeholder="Referência (SKU)" value="{{ item['sku'] }}">
-                <div class="inputs-localidades">
-                    <input id="input-loc-antiga" name="input-loc-antiga" class="input-form form-control" type="text"
-                           placeholder="Localidade Antiga" value="{{ item['loc-antiga'] }}" style="margin-right: 5px">
-                    <input id="input-loc-nova" name="input-loc-nova" type="text" class="input-form form-control"
-                           placeholder="Localidade Nova" value="{{ item['loc-nova'] }}" style="margin-left: 5px">
-                </div>
-                <input id="input-quantidade" name="input-quantidade" type="number" class="input-form form-control"
-                       placeholder="Quantidade (Padrão = Quantidade liberada)" value="{{ item['quantidade'] }}">
-                <input id="input-observacao" name="input-observacao" type="text" class="input-form form-control"
-                       placeholder="Observação (Opcional)">
-                <div class="footer-form">
-                    <a class="btn-cancelar" href="{{ url_for('troca_de_localidade') }}" role="button"
-                       aria-disabled="true">
-                        Cancelar
-                    </a>
-                    <button id="btn-executar" class="btn-executar" type="submit" formaction="/executar"
-                            formmethod="POST">
-                        Executar
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
 
-    <table class="table">
+    <form id="form1">
+
+        <div class="head-form">
+            <input id="display-id" name="display-id" type="text" class="input-form"
+                   placeholder="ID" value="{{ id_item }}" readonly>
+            <select class="input-form" id="input-loja" name="input-loja"
+                    style="border-radius: 5px; cursor: pointer;">
+                {% if id_item %}
+                  <option selected="selected" value="{{ item['loja'] }}">{{ item['loja'] }}</option>
+                {% elif loja_padrao %}
+                  <option selected="selected" value="{{ loja_padrao }}">{{ loja_padrao }}</option>
+                {% endif %}
+              <option value="Rosa Azul">Rosa Azul</option>
+              <option value="Use Force">Use Force</option>
+            </select>
+            <input id="input-user" name="input-user" class="input-form" type="text"
+                   placeholder="Usuário" value="{{ usuario_padrao if usuario_padrao else '' }}">
+        </div>
+
+        <input id="input-sku" name="input-sku" class="input-form" type="text"
+               placeholder="Referência (SKU)" value="{{ item['sku'] }}">
+
+        <div class="inputs-localidades">
+            <input id="input-loc-antiga" name="input-loc-antiga" class="input-loc input-form" type="text"
+                   placeholder="Localidade Antiga" value="{{ item['loc-antiga'] }}">
+            <input id="input-loc-nova" name="input-loc-nova" class="input-loc input-form" type="text"
+                   placeholder="Localidade Nova" value="{{ item['loc-nova'] }}">
+        </div>
+
+        <input id="input-quantidade" name="input-quantidade" type="number" class="input-form"
+               placeholder="Quantidade (Padrão = Quantidade liberada)" value="{{ item['quantidade'] }}">
+        <input id="input-observacao" name="input-observacao" type="text" class="input-form"
+               placeholder="Observação (Opcional)">
+
+        <div class="footer-form">
+            <a id="btn-cancelar-form" class="btn-form btn-cancelar" href="{{ url_for('troca_de_localidade') }}"
+               role="button"
+               aria-disabled="true">
+                Cancelar
+            </a>
+            <button id="btn-executar" class="btn-form btn-executar" type="submit" formaction="/executar"
+                    formmethod="POST">
+                Executar
+            </button>
+        </div>
+
+    </form>
+
+
+    <table id="table-items" class="table">
       <thead class="thead-dark">
         <tr>
             <th scope="col">ID</th>
             <th scope="col">SKU</th>
-            <th scope="col">Localidade Antiga</th>
-            <th scope="col">Localidade Nova</th>
+            <th scope="col">Loc. Antiga</th>
+            <th scope="col">Loc. Nova</th>
             <th scope="col">Quantidade</th>
             <th scope="col">Situação</th>
             <th scope="col">Observação</th>
@@ -87,20 +91,14 @@
                   <td>
                       <form>
                           {% if item['situacao'] == "Alterado" %}
-                              <button id="btn-cancelar" class="btn-cancelar" type="submit"
-                                      style="padding: 5px 10px 5px 10px; font-size: 16px;"
-                                      formaction="/cancelar/{{ item['id'] }}" formmethod="POST">
+                              <button type="submit" formaction="/cancelar/{{ item['id'] }}" formmethod="POST">
                                   Cancelar
                               </button>
                           {% elif item['situacao'] == "Pendente" %}
-                              <button style="padding: 5px 14px 5px 14px; font-size: 16px; color: #FFF;
-                              margin-bottom: 10px; background-color: #0FB8CE;"
-                                      formaction="/troca-de-localidade/{{ item['id'] }}" formmethod="GET" type="submit">
+                              <button type="submit" formaction="/troca-de-localidade/{{ item['id'] }}" formmethod="GET">
                                   Editar
                               </button>
-                              <button id="btn-excluir" class="btn-cancelar" type="submit"
-                                      style="padding: 5px 10px 5px 10px; font-size: 16px;"
-                                      formaction="/excluir/{{ item['id'] }}" formmethod="POST">
+                              <button type="submit" formaction="/excluir/{{ item['id'] }}" formmethod="POST">
                                   Excluir
                               </button>
                           {% endif %}
@@ -111,5 +109,6 @@
         {% endif %}
       </tbody>
     </table>
+    <!---->
 </body>
 </html>

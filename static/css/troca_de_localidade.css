@@ -1,55 +1,87 @@
-.body-inputs-troca {
+form#form1 {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-
-    /* border: solid #FF0000 */
-}
-
-.inputs-troca {
-    width: 50%;
-    height: 48vh;
-    display: flex;
-    display-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    width: 100vw;
+    height: 50vh;
+    font-size: 2vh;
 
     /* border: solid #FF0000 */
 }
 
 .input-form {
-    width: 25em;
-    padding: 5px 0px 5px 0px;
-    margin-bottom: 10px;
     text-align: center;
-    border: 1.5px solid #000;
+    padding: 10px 5px 10px 5px;
+    height: 6vh;
+    border-radius: 10px;
+    border: 2px solid #000;
     color: #000;
 }
 
+/* Linha 1 */
 .head-form {
-    width: 25em;
+    width: 90%;
     display: flex;
-    align-items: center
+    justify-content: space-between;
 
-    /* border: solid #FF0000 */
+    /* border: solid #000 */
 }
 
+#display-id {
+    width: 20%;
+    /* margin-right: 5% */
+}
+
+#input-loja {
+    width: 30%;
+    /* margin-right: 5% */
+}
+
+#input-user {
+    width: 40%;
+}
+
+/* Linha 2 */
+#input-sku {
+    width: 90%;
+}
+
+/* Linha 3 */
 .inputs-localidades {
-    width: 25em;
+    width: 90%;
     display: flex;
-    align-items: center
+    justify-content: space-between;
 
-    /* border: solid #FF0000 */
+    /* border: solid #000 */
 }
 
+.input-loc {
+    width: 47.5%
+}
+
+/* Linha 4 */
+#input-quantidade {
+    width: 90%;
+}
+
+/* Linha 5 */
+#input-observacao {
+    width: 90%;
+}
+
+/* Linha 5 */
 .footer-form {
-    width: 25em;
+    width: 90%;
     display: flex;
-    align-items: center
+    justify-content: space-between;
 
-    /* border: solid #FF0000 */
+    /* border: solid #000 */
 }
 
+a {
+    padding-top: 1.5vh;
+}
 
 a:link {
     text-decoration: none;
@@ -59,15 +91,17 @@ a:visited {
     color: #FFF;
 }
 
-button, a {
+.btn-form {
+    width: 40%;
+    height: 6vh;
+
     border: none;
+    border-radius: 10px;
     text-decoration: none;
+    text-align: center;
+    vertical-align: center;
     cursor: pointer;
     transition: background .3s;
-    border-radius: 5px;
-
-    font-size: 20px;
-    padding: 10px 20px 10px 20px;
 }
 
 .btn-cancelar {
@@ -85,7 +119,6 @@ button, a {
 
 
 .btn-executar {
-    margin-left: 170px;
     background-color: #50A317;
     color: #FFFFFF;
 }
@@ -96,6 +129,12 @@ button, a {
 
 .btn-executar:focus {
     background-color: #B7D885;
+}
+
+/* Tabela */
+#table-items {
+    align-items: center;
+    width: 100vw;
 }
 
 th {
