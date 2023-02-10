@@ -202,6 +202,30 @@ def cancelar(id_item):
     if day_now != day_mov or minutos_now - minutos_mov > 15:
         return 'Já se passaram 15 minutos da movimentação. É impossível cancelar'
 
+    else:
+        sku = item['sku']
+        quantidade = item['quantidade']
+        loja = item['loja']
+
+        loc1 = item['loc-nova']
+        get_loc1 = magazord[loja].get_localidade(deposito=1, codigo_localizacao=loc1)
+        magazord[loja].put_produto_localidade(produto_derivacao=sku, deposito=1, localidade=loc1,
+                                              quantidade_reservada=get_loc1[sku]['reservado'],
+                                              quantidade_configurada=get_loc1[sku]['configurado'] - quantidade)
+
+        loc2 = item['loc-antiga']
+        get_loc2 = magazord[loja].get_localidade(deposito=1, codigo_localizacao=loc2)
+        magazord[loja].put_produto_localidade(produto_derivacao=sku, deposito=1, localidade=loc2,
+                                              quantidade_reservada=get_loc2[sku]['reservado'],
+                                              quantidade_configurada=get_loc2[sku]['configurado'] + quantidade)
+
+        firebase.patch_item(caminho=f'Troca-Localidade/{item["id"]}',
+                            dados={
+                                'situacao': 'Cancelado',
+                                'observacao': f'Cancelado por {padrao.usuario} '
+                                              f'({datetime.now().strftime("%H:%M - %d/%m")})'
+                            })
+
     return redirect(url_for('troca_de_localidade'))
 
 
@@ -211,7 +235,17 @@ def excluir(id_item):
     return redirect(url_for('troca_de_localidade'))
 
 
+@app.route("/detalhes/<id_item>")
+def detalhes(id_item):
+    item = firebase.get_item(caminho='Troca-Localidade', id_item=id_item)
+
+    if not item:
+        return f'Item de ID {id_item} não encontrado'
+    else:
+        return render_template("detalhes.html", item=item)
+
+
 # INICIALIZAÇÃO DA API
 if __name__ == "__main__":
-    # app.run(debug=True)
-    app.run()
+    app.run(debug=True)
+    # app.run()

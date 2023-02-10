@@ -1,3 +1,7 @@
+body {
+    font-family: verdana;
+}
+
 form#form1 {
     display: flex;
     flex-direction: column;
@@ -131,16 +135,60 @@ a:visited {
     background-color: #B7D885;
 }
 
+
+.btn-editar {
+    background-color: #0FB8CE;
+    color: #FFFFFF;
+}
+
+.btn-editar:hover {
+    background-color: #58D4E4;
+}
+
+.btn-editar:focus {
+    background-color: #DFFCFC;
+}
+
+
+
 /* Tabela */
 #table-items {
+    font-size: 2vh;
     align-items: center;
+    vertical-align: middle;
     width: 100vw;
 }
 
 th {
     text-align: center;
+    vertical-align: middle;
 }
 
 td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+form.form-buttons-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+button.btn-table {
+    width: 100%;
+    height: 4vh;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    text-align: center;
+
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background .3s;
     text-align: center;
 }

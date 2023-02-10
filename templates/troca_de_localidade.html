@@ -63,45 +63,49 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">SKU</th>
-            <th scope="col">Loc. Antiga</th>
-            <th scope="col">Loc. Nova</th>
-            <th scope="col">Quantidade</th>
-            <th scope="col">Situação</th>
-            <th scope="col">Observação</th>
-            <th scope="col">Loja</th>
-            <th scope="col">Usuário</th>
-            <th scope="col">Hora/Data</th>
+            <th scope="col">Antiga</th>
+            <th scope="col">Nova</th>
+            <th scope="col">Qnt</th>
             <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         {% if lista_troca_localidade %}
             {% for item in lista_troca_localidade %}
-              <tr>
+                {% if item['situacao'] == 'Alterado' %}
+                    {% set row_color = '#CCFFB7' %}
+                {% elif item['situacao'] == 'Cancelado' %}
+                    {% set row_color = '#FFCBCB' %}
+                {% else %}
+                    {% set row_color = '#FFF' %}
+                {% endif %}
+              <tr style="background-color: {{ row_color }};">
                   <th scope="row">{{ item['id'] }}</th>
                   <th scope="row">{{ item['sku'] }}</th>
                   <td>{{ item['loc-antiga'] }}</td>
                   <td>{{ item['loc-nova'] }}</td>
                   <td>{{ item['quantidade'] }}</td>
-                  <th scope="row">{{ item['situacao'] }}</th>
-                  <th scope="row">{{ item['observacao'] }}</th>
-                  <th scope="row">{{ item['loja'] }}</th>
-                  <td>{{ item['usuario'] }}</td>
-                  <td>{{ item['data-hora'] }}</td>
                   <td>
-                      <form>
+                      <form class="form-buttons-table">
                           {% if item['situacao'] == "Alterado" %}
-                              <button type="submit" formaction="/cancelar/{{ item['id'] }}" formmethod="POST">
+                              <button class="btn-table btn-cancelar" type="submit"
+                                      formaction="/cancelar/{{ item['id'] }}" formmethod="POST">
                                   Cancelar
                               </button>
                           {% elif item['situacao'] == "Pendente" %}
-                              <button type="submit" formaction="/troca-de-localidade/{{ item['id'] }}" formmethod="GET">
+                              <button class="btn-table btn-editar" type="submit"
+                                      formaction="/troca-de-localidade/{{ item['id'] }}" formmethod="GET">
                                   Editar
                               </button>
-                              <button type="submit" formaction="/excluir/{{ item['id'] }}" formmethod="POST">
+                              <button class="btn-table btn-cancelar" type="submit"
+                                      formaction="/excluir/{{ item['id'] }}" formmethod="POST">
                                   Excluir
                               </button>
                           {% endif %}
+                          <button class="btn-table btn-editar" type="submit"
+                                  formaction="/detalhes/{{ item['id'] }}" formmethod="GET">
+                                  Detalhes
+                          </button>
                       </form>
                   </td>
               </tr>
@@ -109,6 +113,6 @@
         {% endif %}
       </tbody>
     </table>
-    <!---->
+
 </body>
 </html>
